@@ -14,7 +14,6 @@ import { toast , ToastContainer} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import './App.css';
 
-const api = "http://localhost:5000/users"
 
 const initialState = {
   name: "",
@@ -36,7 +35,10 @@ function App() {
   }, [])
   
   const loadUsers = async () => {
-    const response = await axios.get(api)
+    const devEnv = process.env.NODE_ENV !== "production"
+    const {REACT_APP_DEV_URL, REACT_APP_PROD_URL} = process.env
+    const response = await axios.get(`${devEnv ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}`)
+    // const response = await axios.get(api)
     console.log(response)
     setData(response.data)
   }
@@ -62,7 +64,9 @@ function App() {
       toast.error("Please fill all input field")
     } else {
       if (!editMode) {
-        axios.post(api, state)
+        const devEnv = process.env.NODE_ENV !== "production"
+        const {REACT_APP_DEV_URL, REACT_APP_PROD_URL} = process.env
+        axios.post(`${devEnv ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}`, state)
         toast.success("Added successfully")
         setState(initialState)
         setTimeout(() => {
@@ -70,7 +74,9 @@ function App() {
         }, 500)
 
       } else {
-        axios.put(`${api}/${userId}`, state)
+        const devEnv = process.env.NODE_ENV !== "production"
+        const {REACT_APP_DEV_URL, REACT_APP_PROD_URL} = process.env
+        axios.put(`${devEnv ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/${userId}`, state)
         toast.success("updated successfully")
         setState(initialState)
         setTimeout(() => {
@@ -86,7 +92,9 @@ function App() {
   // handling Delete
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
-      axios.delete(`${api}/${id}`);
+      const devEnv = process.env.NODE_ENV !== "production"
+    const {REACT_APP_DEV_URL, REACT_APP_PROD_URL} = process.env
+      axios.delete(`${devEnv ? REACT_APP_DEV_URL:REACT_APP_PROD_URL}/${id}`);
       toast.success("User deleted")
       setTimeout(() => {
         loadUsers()
