@@ -19,6 +19,16 @@ const api = "http://localhost:5000/users"
 function App() {
   const [data, setData] = useState([])
 
+  useEffect(() => {
+    // loadUsers()
+    
+  }, [])
+  
+  const loadUsers = async () => {
+    const response = axios.get(api)
+    setData(response.data)
+  }
+
   return (
     <>
       <ToastContainer />
@@ -35,6 +45,12 @@ function App() {
           </Col>
           <Col md={8}>
             <h2>Contacts</h2>
+            <Table bordered hover>
+              <thead>
+                <tr></tr>
+              </thead>
+
+            </Table>
           </Col>
         </Row>
       </Container>
