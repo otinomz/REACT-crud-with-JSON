@@ -39,12 +39,16 @@ function App() {
     setData(response.data)
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
+
   return (
     <>
       <ToastContainer />
       <Navbar bg="primary" variant="dark" className='justify-content-center'>
         <Navbar.Brand>
-          React app and JSON Server
+          <h1>Contact Manager</h1>
         </Navbar.Brand>
       </Navbar>
 
@@ -52,8 +56,8 @@ function App() {
         <Row>
           <Col md={4}>
             <h2>Add Contact</h2>
-            <Form>
-              <Form.Group>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mt-2">
                 <Form.Label style={{ textAlign: "left" }}>Name</Form.Label>
                 <Form.Control
                   type="text"
@@ -62,7 +66,7 @@ function App() {
                   value={name}
                 /> 
               </Form.Group>
-              <Form.Group>
+              <Form.Group className="mt-2">
                 <Form.Label style={{ textAlign: "left" }}>Email</Form.Label>
                 <Form.Control
                   type="text"
@@ -71,16 +75,16 @@ function App() {
                   value={email}
                 /> 
               </Form.Group>
-              <Form.Group>
+              <Form.Group className="mt-2">
                 <Form.Label style={{ textAlign: "left" }}>Contact</Form.Label>
-                <Form.Control
+                <Form.Control 
                   type="text"
                   placeholder="Enter Contact"
                   name="contact"
                   value={contact}
                 /> 
               </Form.Group>
-              <Form.Group>
+              <Form.Group className="mt-2">
                 <Form.Label style={{ textAlign: "left" }}>Address</Form.Label>
                 <Form.Control
                   type="text"
