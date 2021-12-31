@@ -24,7 +24,8 @@ function App() {
   }, [])
   
   const loadUsers = async () => {
-    const response = axios.get(api)
+    const response = await axios.get(api)
+    console.log(response)
     setData(response.data)
   }
 
