@@ -54,42 +54,46 @@ function App() {
             <h2>Add Contact</h2>
             <Form>
               <Form.Group>
-                <Form.Label style={{ textAlign: "left" }}></Form.Label>
+                <Form.Label style={{ textAlign: "left" }}>Name</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="name"
+                  placeholder="Enter Name"
                   name="name"
                   value={name}
                 /> 
               </Form.Group>
               <Form.Group>
-                <Form.Label style={{ textAlign: "left" }}></Form.Label>
+                <Form.Label style={{ textAlign: "left" }}>Email</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="email"
+                  placeholder="Enter Email"
                   name="email"
                   value={email}
                 /> 
               </Form.Group>
               <Form.Group>
-                <Form.Label style={{ textAlign: "left" }}></Form.Label>
+                <Form.Label style={{ textAlign: "left" }}>Contact</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="contact"
+                  placeholder="Enter Contact"
                   name="contact"
                   value={contact}
                 /> 
               </Form.Group>
               <Form.Group>
-                <Form.Label style={{ textAlign: "left" }}></Form.Label>
+                <Form.Label style={{ textAlign: "left" }}>Address</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="address"
+                  placeholder="Enter Address"
                   name="address"
                   value={address}
                 /> 
               </Form.Group>
-            </Form>
+
+              <div className="d-grid gap-2 mt-4">
+                <Button type="submit" variant="primary" size="lg">Submit</Button>
+              </div>
+            </Form> 
           </Col>
           <Col md={8}>
             <h2>Contacts</h2>
