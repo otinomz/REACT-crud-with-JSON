@@ -17,15 +17,27 @@ import './App.css';
 const api = "http://localhost:5000/users"
 
 function App() {
+  const [data, setData] = useState([])
+
   return (
     <>
       <ToastContainer />
       <Navbar bg="primary" variant="dark" className='justify-content-center'>
-
         <Navbar.Brand>
           React app and JSON Server
         </Navbar.Brand>
       </Navbar>
+
+      <Container style={{ marginTop: "70px"}}>
+        <Row>
+          <Col md={4}>
+            <h2>Add Contact</h2>
+          </Col>
+          <Col md={8}>
+            <h2>Contacts</h2>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }
