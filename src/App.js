@@ -40,7 +40,39 @@ function App() {
   }
 
   const handleSubmit = (e) => {
+    // prevent the default behaviour of forms reloading
     e.preventDefault()
+    // check to see if the input field is empty
+    if (!name || !address || !email || !contact) {
+      toast.error("Please fill all input field")
+    } else {
+      axios.post(api, state)
+      toast.success("Added successfully")
+      // set the current state back to empty after
+      // updating hitting the submit button
+      setState(initialState)
+
+      // we have to refresh the page again
+      // to see the information reflected on  the table
+      // to avoid that, we add the setTimeout to do that 
+      // within 500 milliseconds
+      setTimeout(() => {
+        loadUsers()
+      }, 500)
+
+    }
+  }
+
+  // handling input field change  
+  const handleChange = (e) => {
+    // since the function would be receiving a paramter/value
+    // we ought to know that value to add to state
+    // using javascript event to retrieve the value
+    // e.target.value 
+    // destructuring e.target 
+    let { name, value } = e.target
+    // updating the state with the retrieved value
+    setState({...state, [name]: value})
   }
 
   return (
@@ -64,6 +96,7 @@ function App() {
                   placeholder="Enter Name"
                   name="name"
                   value={name}
+                  onChange={handleChange}
                 /> 
               </Form.Group>
               <Form.Group className="mt-2">
@@ -73,6 +106,7 @@ function App() {
                   placeholder="Enter Email"
                   name="email"
                   value={email}
+                  onChange={handleChange}
                 /> 
               </Form.Group>
               <Form.Group className="mt-2">
@@ -82,6 +116,7 @@ function App() {
                   placeholder="Enter Contact"
                   name="contact"
                   value={contact}
+                  onChange={handleChange}
                 /> 
               </Form.Group>
               <Form.Group className="mt-2">
@@ -91,6 +126,7 @@ function App() {
                   placeholder="Enter Address"
                   name="address"
                   value={address}
+                  onChange={handleChange}
                 /> 
               </Form.Group>
 
