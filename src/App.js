@@ -52,6 +52,44 @@ function App() {
         <Row>
           <Col md={4}>
             <h2>Add Contact</h2>
+            <Form>
+              <Form.Group>
+                <Form.Label style={{ textAlign: "left" }}></Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="name"
+                  name="name"
+                  value={name}
+                /> 
+              </Form.Group>
+              <Form.Group>
+                <Form.Label style={{ textAlign: "left" }}></Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="email"
+                  name="email"
+                  value={email}
+                /> 
+              </Form.Group>
+              <Form.Group>
+                <Form.Label style={{ textAlign: "left" }}></Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="contact"
+                  name="contact"
+                  value={contact}
+                /> 
+              </Form.Group>
+              <Form.Group>
+                <Form.Label style={{ textAlign: "left" }}></Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="address"
+                  name="address"
+                  value={address}
+                /> 
+              </Form.Group>
+            </Form>
           </Col>
           <Col md={8}>
             <h2>Contacts</h2>
