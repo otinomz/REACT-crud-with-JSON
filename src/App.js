@@ -158,7 +158,9 @@ function App() {
               </Form.Group>
 
               <div className="d-grid gap-2 mt-4">
-                <Button type="submit" variant="primary" size="lg">Submit</Button>
+                <Button type="submit" variant="primary" size="lg">
+                  {editMode ? "Update" : "Submit" }
+                </Button>
               </div>
             </Form> 
           </Col>
