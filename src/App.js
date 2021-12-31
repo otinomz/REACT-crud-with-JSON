@@ -26,6 +26,8 @@ const initialState = {
 function App() {
   const[state, setState] = useState(initialState)
   const [data, setData] = useState([])
+  const [userId, setUserId] = useState(null)
+  const [editMode, setEditMode] = useState(false)
 
   const {name, email, contact, address} = state
 
@@ -59,24 +61,29 @@ function App() {
     if (!name || !address || !email || !contact) {
       toast.error("Please fill all input field")
     } else {
-      axios.post(api, state)
-      toast.success("Added successfully")
-      // set the current state back to empty after
-      // updating hitting the submit button
-      setState(initialState)
+      if (!editMode) {
+        axios.post(api, state)
+        toast.success("Added successfully")
+        setState(initialState)
+        setTimeout(() => {
+          loadUsers()
+        }, 500)
 
-      // we have to refresh the page again
-      // to see the information reflected on  the table
-      // to avoid that, we add the setTimeout to do that 
-      // within 500 milliseconds
-      setTimeout(() => {
-        loadUsers()
-      }, 500)
-
+      } else {
+        axios.put(`${api}/${userId}`, state)
+        toast.success("updated successfully")
+        setState(initialState)
+        setTimeout(() => {
+          loadUsers()
+        }, 500)
+        setUserId(null)
+        setEditMode(false)
+      }
     }
+      
   }
 
-  // hadnling Delete
+  // handling Delete
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       axios.delete(`${api}/${id}`);
@@ -85,6 +92,14 @@ function App() {
         loadUsers()
       }, 500)
     }
+  }
+
+  // handling Update
+  const handleUpdate = (id) => {
+    const singleUser = data.find((item) => item.id === id)
+    setState({ ...singleUser })
+    setUserId(id)
+    setEditMode(true)
   }
 
   return (
@@ -170,7 +185,7 @@ function App() {
                     <td>{item.address}</td>
                     <td>
                       <ButtonGroup>
-                        <Button style={{marginRight:"5px"}} variant="secondary">
+                        <Button onClick={() => handleUpdate(item.id)} style={{marginRight:"5px"}} variant="secondary">
                           Update
                         </Button>
                         <Button
