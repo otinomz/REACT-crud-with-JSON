@@ -16,8 +16,18 @@ import './App.css';
 
 const api = "http://localhost:5000/users"
 
+const initialState = {
+  name: "",
+  email: "",
+  contact: "",
+  address: "",
+}
+
 function App() {
+  const[state, setState] = useState(initialState)
   const [data, setData] = useState([])
+
+  const {name, email, contact, address} = state
 
   useEffect(() => {
     loadUsers()
@@ -69,7 +79,7 @@ function App() {
                         <Button style={{marginRight:"5px"}} variant="secondary">
                           Update
                         </Button>
-                        <Button style={{marginRight:"5px"}} variant="danger">
+                        <Button variant="danger">
                           Delete
                         </Button>
                       </ButtonGroup>
