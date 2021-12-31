@@ -14,7 +14,7 @@ import { toast , ToastContainer} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import './App.css';
 
-const api = "http://localhost:5000/users"
+const api = "https://crudcontactmanager.herokuapp.com/api"
 
 const initialState = {
   name: "",
