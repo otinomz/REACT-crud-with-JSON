@@ -20,8 +20,7 @@ function App() {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    // loadUsers()
-    
+    loadUsers()
   }, [])
   
   const loadUsers = async () => {
@@ -47,9 +46,36 @@ function App() {
             <h2>Contacts</h2>
             <Table bordered hover>
               <thead>
-                <tr></tr>
+                <tr>
+                  <th>No.</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Contact</th>
+                  <th>Address</th>
+                  <th>Action</th>
+                </tr>
               </thead>
-
+              {data && data.map((item, index) => (
+                <tbody key={index}>
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>{item.name}</td>
+                    <td>{item.email}</td>
+                    <td>{item.contact}</td>
+                    <td>{item.address}</td>
+                    <td>
+                      <ButtonGroup>
+                        <Button style={{marginRight:"5px"}} variant="secondary">
+                          Update
+                        </Button>
+                        <Button style={{marginRight:"5px"}} variant="danger">
+                          Delete
+                        </Button>
+                      </ButtonGroup>
+                    </td>
+                  </tr>
+                </tbody>
+              )) }
             </Table>
           </Col>
         </Row>
