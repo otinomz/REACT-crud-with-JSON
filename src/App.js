@@ -39,6 +39,19 @@ function App() {
     setData(response.data)
   }
 
+  // handling input field change  
+  const handleChange = (e) => {
+    // since the function would be receiving a paramter/value
+    // we ought to know that value to add to state
+    // using javascript event to retrieve the value
+    // e.target.value 
+    // destructuring e.target 
+    let { name, value } = e.target
+    // updating the state with the retrieved value
+    setState({...state, [name]: value})
+  }
+
+  // handling submit
   const handleSubmit = (e) => {
     // prevent the default behaviour of forms reloading
     e.preventDefault()
@@ -63,16 +76,15 @@ function App() {
     }
   }
 
-  // handling input field change  
-  const handleChange = (e) => {
-    // since the function would be receiving a paramter/value
-    // we ought to know that value to add to state
-    // using javascript event to retrieve the value
-    // e.target.value 
-    // destructuring e.target 
-    let { name, value } = e.target
-    // updating the state with the retrieved value
-    setState({...state, [name]: value})
+  // hadnling Delete
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      axios.delete(`${api}/${id}`);
+      toast.success("User deleted")
+      setTimeout(() => {
+        loadUsers()
+      }, 500)
+    }
   }
 
   return (
@@ -161,7 +173,9 @@ function App() {
                         <Button style={{marginRight:"5px"}} variant="secondary">
                           Update
                         </Button>
-                        <Button variant="danger">
+                        <Button
+                          onClick={() => handleDelete(item.id)}
+                          variant="danger">
                           Delete
                         </Button>
                       </ButtonGroup>
